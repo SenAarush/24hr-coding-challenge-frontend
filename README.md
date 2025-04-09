@@ -6,7 +6,7 @@ This is the **React.js frontend** for the Product Management Dashboard built as 
 
 ## 🌐 Live Demo
 
-[🔗 View Live Site](24hr-coding-challenge-frontend-tf3h.vercel.app)
+[🔗 View Live Site](https://24hr-coding-challenge-frontend-tf3h.vercel.app)
 
 ---
 
