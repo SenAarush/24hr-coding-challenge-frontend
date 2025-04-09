@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
 
+interface IProduct {
+  _id?: string;
+  name: string;
+  desc: string;
+  category: string;
+  price: number;
+  rating: number;
+  image?: string;
+}
+
 interface ProductFormProps {
   initialData?: IProduct;
   onClose: () => void;
@@ -10,7 +20,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData, onClose, onSubmi
   const [product, setProduct] = useState<IProduct>(
     initialData || {
       name: '',
-      description: '',
+      desc: '',
       category: '',
       price: 0,
       rating: 0,
@@ -20,7 +30,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData, onClose, onSubmi
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setProduct(prev => ({
+    setProduct((prev) => ({
       ...prev,
       [name]: name === 'price' || name === 'rating' ? Number(value) : value,
     }));
@@ -28,6 +38,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData, onClose, onSubmi
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (product.price < 0 || product.rating < 0 || product.rating > 5) {
+      alert('Please enter valid values for price and rating.');
+      return;
+    }
     onSubmit(product);
   };
 
@@ -54,9 +68,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData, onClose, onSubmi
             required
           />
           <textarea
-            name="description"
+            name="desc"
             placeholder="Description"
-            value={product.description}
+            value={product.desc}
             onChange={handleChange}
             rows={3}
             className="w-full px-4 py-2 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -84,7 +98,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData, onClose, onSubmi
           <input
             type="number"
             name="rating"
-            placeholder="Rating"
+            placeholder="Rating (0 to 5)"
             value={product.rating}
             onChange={handleChange}
             className="w-full px-4 py-2 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -96,13 +110,14 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData, onClose, onSubmi
           <input
             type="text"
             name="image"
-            placeholder="Image URL"
+            placeholder="Image URL (optional)"
             value={product.image}
             onChange={handleChange}
             className="w-full px-4 py-2 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
           <button
             type="submit"
+            // onClick={}
             className="w-full bg-purple-600 hover:bg-purple-700 transition rounded-md py-2 font-semibold"
           >
             {initialData ? 'Update' : 'Create'}

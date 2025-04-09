@@ -29,7 +29,7 @@ const sampleProducts = [
         category: "Gadgets",
         price: 199.99,
         rating: 4.4,
-        image: "https://github.blog/wp-content/uploads/2023/12/Security-DarkMode-1.png?fit=1200%2C630",
+        // image: "https://github.blog/wp-content/uploads/2023/12/Security-DarkMode-1.png?fit=1200%2C630",
     },
     {
         name: "Desk Lamp",
