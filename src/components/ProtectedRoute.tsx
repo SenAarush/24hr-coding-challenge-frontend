@@ -15,10 +15,9 @@ import { Navigate,Outlet } from 'react-router-dom';
 // };
 
 const ProtectedRoute: React.FC = () => {
-    // const token = localStorage.getItem('token');
-    const check = true;
+    const token = localStorage.getItem('token')
 
-    return check ? <Outlet /> : <Navigate to="/signin" replace />;
+    return token ? <Outlet /> : <Navigate to="/auth" replace />;
 
     //   return isTokenValid(token) ? <Outlet /> : <Navigate to="/login" replace />;
 };
