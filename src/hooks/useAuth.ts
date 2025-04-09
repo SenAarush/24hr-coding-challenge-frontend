@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const uri = "https://two4hr-coding-challenge.onrender.com";
+const uri = import.meta.env.VITE_API_URL;
 
 interface LoginPayload {
   email: string;
@@ -29,6 +29,7 @@ export const useAuth = () => {
       localStorage.setItem('token', res.data.data.token);
       console.log('Login successful:', res.data.data.token);
       navigator('/')
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error('Login error:', err.response?.data?.message || err.message);
       setError(err.response?.data?.message || 'Login failed');
@@ -41,9 +42,10 @@ export const useAuth = () => {
     try {
       setLoading(true);
       setError(null);
-      const res = await axios.post(uri + '/auth/signup', payload);
+      await axios.post(uri + '/auth/signup', payload);
     //   localStorage.setItem('token', res.data.token);
       console.log('Signup successful',);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error('Signup error:', err.response?.data?.message || err.message);
       setError(err.response?.data?.message || 'Signup failed');
